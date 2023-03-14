@@ -1,101 +1,37 @@
 import postgres from "pg";
 const { Client } = postgres;
 import Banco from "../banco.js";
-import Pais from "../pais.js";
+import Pais from '../models/paisdal.js';
+
+const p = new Pais;
 
 export default class PaisController {
     
-    async selecionarUm(id) {
-        let client = await new Banco().conectar();
-        let pais = new Pais(0, "", "", "");
-        try {
-            let res = await client.query(`SELECT * from pais where id=${id}`);
-            if (res.rows.length > 0)
-                pais = res.rows[0];
-        }
-        finally {
-            client.end();
-        }
-        return pais;
+    async index(req, res) {
+        const paises = await p.selecionarVarios("");
+        res.json(paises);
     }
 
-    async selecionarVarios(filtro) {
-        let client = await new Banco().conectar();
-        let query = "SELECT * from pais"
-        if (filtro != "")
-            query = query + ` where ${filtro}`;
-
-        try {
-            let res = await client.query(query);
-            return res.rows;
-        }
-        finally { client.end(); }
+    async inserir(req, res) {
+        const pais = req.body;
+        const resposta = await p.gravar(pais);
+        res.json(resposta);
     }
 
-    async selecionarVariosNome(filtro) {
-        let client = await new Banco().conectar();
-        let query = "SELECT * FROM pais"
-        if (filtro != "")
-            query = query + ` WHERE nome LIKE '%${filtro}'`;
-
-        try {
-            let res = await client.query(query);
-            return res.rows;
-        }
-        finally { client.end(); }
+    async exibirUm(req, res) {
+        const id = req.params.id;
+        const resposta = await p.selecionarUm(id);
+        res.json(resposta);
     }
 
-    async selecionarVariosIdioma(filtro) {
-        let client = await new Banco().conectar();
-        let query = "SELECT * from pais"
-        if (filtro != "")
-            query = query + ` where ${filtro}`;
-
-        try {
-            let res = await client.query(query);
-            return res.rows;
-        }
-        finally { client.end(); }
+    async exibirNome(req, res) {
+        const nome = "nome LIKE " + req.params.nome;
+        const resposta = await p.selecionarVarios(nome);
+        res.json(resposta)
     }
 
-    async gravar(pais) {
-        let client = await new Banco().conectar();
-        let sql = "INSERT INTO pais VALUES (default,$1,$2,$3)";
-        let values = Object.values(pais).slice(1); //retira o id do país
-        try {
-            let res = await client.query(sql, values);
-            return res.rowCount>0;
-        }
-        catch(Exception)
-        {
-            return false;
-        }
-        finally {
-            client.end();
-        }
-    }
+    // async exibirIdioma(req, res) {
 
-    async alterar(pais) {
-        let client = await new Banco().conectar();
-        let sql = "UPDATE pais SET id=$1, sigla=$2, idioma=$3, nome=$4 WHERE id = $1";
-        let values = Object.values(pais);
-        try {
-            let res = await client.query(sql, values);
-            return res.rowCount;
-        }
-        finally {
-            client.end();
-        }
-    }
-    async apagar(id) {
-        let client = await new Banco().conectar();
-        let sql = "DELETE FROM pais WHERE id = " + id;
-        try {
-            return (await client.query(sql)).rowCount;
-        }
-        finally {
-            client.end();
-        }
-    }
+    // }
 
 }

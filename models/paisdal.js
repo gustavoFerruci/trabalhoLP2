@@ -1,7 +1,7 @@
 import postgres from "pg";
 const { Client } = postgres;
-import Banco from "./banco.js";
-import Pais from "./pais.js";
+import Banco from "../banco.js";
+import Pais from "../pais.js";
 
 export default class PaisDAL {
     
