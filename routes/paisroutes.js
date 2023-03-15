@@ -19,7 +19,7 @@ proutes.get("/selecionar-pais/:id", pController.exibirUm);
 proutes.get("/selecionar-nome/:nome", pController.exibirNome);
 
 // // // c) fazer busca por paises dado o idioma. Deve retornar uma lista json
-// proutes.get("/selecionar-idioma/:idioma", pController.exibirIdioma);
+proutes.get("/selecionar-idioma/:idioma", pController.exibirIdioma);
 
     
  

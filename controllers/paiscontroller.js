@@ -25,13 +25,15 @@ export default class PaisController {
     }
 
     async exibirNome(req, res) {
-        const nome = "nome LIKE " + req.params.nome;
-        const resposta = await p.selecionarVarios(nome);
+        const sql = `nome LIKE '%${req.params.nome}%'`;
+        const resposta = await p.selecionarVarios(sql);
         res.json(resposta)
     }
 
-    // async exibirIdioma(req, res) {
-
-    // }
+    async exibirIdioma(req, res) {
+        const sql = `idioma LIKE '%${req.params.idioma}%'`;
+        const resposta = await p.selecionarVarios(sql);
+        res.json(resposta)
+    }
 
 }
