@@ -1,5 +1,4 @@
 global.SECRET = "FIPP-UNOESTE-PRUDENTE";
-
 import postgres from "pg";
 const { Client } = postgres;
 import Banco from "../banco.js";

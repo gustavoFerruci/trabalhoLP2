@@ -4,26 +4,26 @@ function logar() {
     const URL_TO_FETCH = 'http://localhost:8081/autenticar';
 
     var tag = document.getElementById("feedback");
-
-    const data = new FormData(document.getElementById('fdados'));
     const user = document.getElementById('user');
     const pass = document.getElementById('pass');
+
+    const data = new FormData(document.getElementById('fdados'));
     const value = JSON.stringify(Object.fromEntries(data.entries()));
 
 
     fetch(URL_TO_FETCH, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: {
-            "usuario" : user,
-            "senha" : pass
-        }
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user, pass })
     })
         .then(response => {
             response.json()
                 .then((result) => {
                     tag.innerHTML = JSON.stringify(result);
                     token = result.token;
+                    localStorage.setItem('token', result.token);
                 });
         })
         .catch(err => { console.error("Erro:" + err); });

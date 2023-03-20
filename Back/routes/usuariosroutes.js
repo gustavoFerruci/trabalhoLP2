@@ -1,6 +1,8 @@
+global.SECRET = "FIPP-UNOESTE-PRUDENTE";
+
 import * as express from 'express';
 import UsuariosController from '../controllers/usuarioscontroller.js';
-import jwt from 'jsonwebtoken';
+import Login from "../middleware/login.js";
 
 const uController = new UsuariosController()
 
