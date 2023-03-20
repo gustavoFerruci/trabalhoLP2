@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script SRC="indexcontroller.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+	<style>
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+		h1 {
+			text-align: center;
+			color: #444444;
+		}
+		form {
+			background-color: #ffffff;
+			width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 0px 10px #cccccc;
+		}
+		input[type="text"], input[type="password"] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		button {
+			background-color: #4CAF50;
+			color: #ffffff;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: 100%;
+		}
+		button:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+<body>
+    <h1>Tela de Login</h1>
+	<form id="fdados">
+		<label for="user">Nome de usuário:</label>
+		<input type="text" id="user" name="user" placeholder="Digite seu nome de usuário">
+
+		<label for="pass">Senha:</label>
+		<input type="password" id="pass" name="pass" placeholder="Digite sua senha">
+
+		<button type="submit" onclick="logar()">Entrar</button>
+        <div id="feedback"></div> 
+	</form>
+    <!-- <div>
+        <form id="fdados">
+           <p><input type="text" placeholder="informe o usuario" name="user"/></p>
+           <p><input type="password" placeholder="informe a senha" name="pass"/></p>
+        </form>
+        <button onclick="logar()">Logar</button>
+    </div> -->
+    
+</body>
